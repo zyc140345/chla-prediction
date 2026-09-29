@@ -1,0 +1,49 @@
+# macOS / editors
+.DS_Store
+.idea/
+.vscode/
+
+# Python environments and caches
+.venv/
+venv/
+__pypackages__/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# uv local cache
+.uv-cache/
+
+# Local environment
+.env
+.env.*
+!.env.example
+configs/*.local.yaml
+configs/*private*.yaml
+configs/gee_runtime*.yaml
+
+# Generated experiment outputs and figures
+/outputs/
+/figures/
+
+# Downloaded and processed data
+/data/*
+
+# Every run config; tools/generate_forecast_configs.py writes it.
+configs/generated/
+
+# Large model and tabular binary outputs
+*.joblib
+*.pkl
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.npy
+*.npz
+*.parquet
+
+*.log

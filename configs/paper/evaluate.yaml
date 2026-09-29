@@ -1,0 +1,66 @@
+run_name: evaluation_transfer
+output_dir: outputs/runs
+data:
+  archives:
+  - water_id: baogu
+    manifest_path: data/evaluation/baogu/stac_download_manifest.jsonl
+  - water_id: loweswater
+    manifest_path: data/evaluation/loweswater/stac_download_manifest.jsonl
+  - water_id: georges
+    manifest_path: data/evaluation/georges/stac_download_manifest.jsonl
+  - water_id: wentzel
+    manifest_path: data/evaluation/wentzel/stac_download_manifest.jsonl
+  - water_id: hushan
+    manifest_path: data/evaluation/hushan/stac_download_manifest.jsonl
+  sequence:
+    input_window: 6
+    min_input_observations: 4
+    train_end: '2023-12-31'
+    val_end: '2024-06-30'
+  max_scene_cloud_fraction: 0.6
+  crop_size: 256
+prediction_manifests:
+  ours_zero: outputs/runs/infer_ours_zero/prediction_manifest.jsonl
+  ours_adapted: outputs/runs/merged_ours_adapted.jsonl
+  rand_zero: outputs/runs/infer_rand_zero/prediction_manifest.jsonl
+  rand_adapted: outputs/runs/merged_rand_adapted.jsonl
+  resnet18_zero: outputs/runs/infer_resnet18_zero/prediction_manifest.jsonl
+  resnet18_adapted: outputs/runs/merged_resnet18_adapted.jsonl
+  resnet50_zero: outputs/runs/infer_resnet50_zero/prediction_manifest.jsonl
+  resnet50_adapted: outputs/runs/merged_resnet50_adapted.jsonl
+  convnext_zero: outputs/runs/infer_convnext_zero/prediction_manifest.jsonl
+  convnext_adapted: outputs/runs/merged_convnext_adapted.jsonl
+  convnext_l_zero: outputs/runs/infer_convnext_l_zero/prediction_manifest.jsonl
+  convnext_l_adapted: outputs/runs/merged_convnext_l_adapted.jsonl
+  convgru_zero: outputs/runs/infer_convgru_zero/prediction_manifest.jsonl
+  convgru_adapted: outputs/runs/merged_convgru_adapted.jsonl
+  convlstm_zero: outputs/runs/infer_convlstm_zero/prediction_manifest.jsonl
+  convlstm_adapted: outputs/runs/merged_convlstm_adapted.jsonl
+  simvp_zero: outputs/runs/infer_simvp_zero/prediction_manifest.jsonl
+  simvp_adapted: outputs/runs/merged_simvp_adapted.jsonl
+  stt_zero: outputs/runs/infer_stt_zero/prediction_manifest.jsonl
+  stt_adapted: outputs/runs/merged_stt_adapted.jsonl
+  notime_zero: outputs/runs/infer_notime_zero/prediction_manifest.jsonl
+  notime_adapted: outputs/runs/merged_notime_adapted.jsonl
+  clay_lora_zero: outputs/runs/infer_clay_lora_zero/prediction_manifest.jsonl
+  clay_lora_adapted: outputs/runs/merged_clay_lora_adapted.jsonl
+  corpus25_zero: outputs/runs/infer_corpus25_zero/prediction_manifest.jsonl
+  corpus25_adapted: outputs/runs/merged_corpus25_adapted.jsonl
+  corpus50_zero: outputs/runs/infer_corpus50_zero/prediction_manifest.jsonl
+  corpus50_adapted: outputs/runs/merged_corpus50_adapted.jsonl
+  corpus100_zero: outputs/runs/infer_corpus100_zero/prediction_manifest.jsonl
+  corpus100_adapted: outputs/runs/merged_corpus100_adapted.jsonl
+  corpus200_zero: outputs/runs/infer_corpus200_zero/prediction_manifest.jsonl
+  corpus200_adapted: outputs/runs/merged_corpus200_adapted.jsonl
+  scratch_convlstm: outputs/runs/merged_scratch_convlstm.jsonl
+  scratch_ours: outputs/runs/merged_scratch_ours.jsonl
+  xgboost_pixel: outputs/runs/baseline_xgboost/prediction_manifest.jsonl
+  rf_pixel: outputs/runs/baseline_rf/prediction_manifest.jsonl
+  pix2pix_zero: outputs/runs/infer_pix2pix_zero/prediction_manifest.jsonl
+  persistence: outputs/runs/infer_persistence/prediction_manifest.jsonl
+  climatology: outputs/runs/infer_climatology/prediction_manifest.jsonl
+water_mask_band: s1_median_water
+water_mask_threshold: 50.0
+shoreline_erosion_px: 1
+skill_reference: persistence
+mdn_weights: data/models/mdn/mdn_msi_chl.npz

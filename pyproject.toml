@@ -1,0 +1,97 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "chla-prediction"
+version = "0.1.0"
+description = "Few-shot chlorophyll-a field forecasting for small inland waters from Sentinel-2 image sequences."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "numpy>=1.26,<3",
+  "pandas>=2.2,<3",
+  "peft>=0.14,<1",
+  "pydantic>=2.9,<3",
+  "pyyaml>=6.0,<7",
+  "rasterio>=1.4,<2",
+  "scikit-learn>=1.5,<2",
+  "scipy>=1.14,<2",
+  # torch < 2.8 ships CUDA 12.6 builds, which run on CUDA 12.4 drivers.
+  "torch>=2.7,<2.8",
+  "torchvision>=0.22,<0.23",
+  "xgboost==2.1.4",
+]
+
+[project.optional-dependencies]
+# Earth Engine downloads (tools/data/fetch_water_extent.py).
+gee = [
+  "earthengine-api>=1.5,<2",
+]
+# Paper figures (tools/figures/).
+figures = [
+  "cartopy>=0.24,<1",
+  "matplotlib>=3.9,<4",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3,<10",
+  "ruff>=0.8,<1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/chla_prediction"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/configs/*.csv",
+  "/configs/*.txt",
+  "/configs/paper",
+  "/README.md",
+  "/pyproject.toml",
+  "/src/chla_prediction",
+  "/tests",
+  "/tools",
+]
+
+[tool.uv]
+package = true
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+extend-exclude = [
+  ".uv-cache",
+  "data",
+  "outputs",
+]
+
+[tool.ruff.lint]
+select = [
+  "E",
+  "F",
+  "I",
+  "B",
+  "UP",
+  "SIM",
+  "C4",
+  "PIE",
+  "PERF",
+  "PT",
+  "PTH",
+  # Docstring layout: a one-line summary, then a blank line; closing quotes on their own line.
+  "D205",
+  "D209",
+  "D212",
+]
+ignore = [
+  "E501",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --import-mode=importlib"
+pythonpath = ["tools"]

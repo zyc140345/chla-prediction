@@ -1,0 +1,6 @@
+water_id,hydrolakes_id,name,country,lake_type,area_km2,west,south,east,north
+baogu,hylak_1393768,Baogu Reservoir,China,2,0.81,109.236311,18.405311,109.263688,18.428734
+loweswater,hylak_1318392,Loweswater,United Kingdom,1,0.5,-3.3754872082227743,54.57169896672849,-3.335068347332514,54.595122390151914
+georges,hylak_110036,Georges Pond,United States of America,1,1.35,-68.257879,44.600811,-68.224976,44.624235
+wentzel,hylak_183453,Wentzel Dam,South Africa,2,2.02,25.328894,-27.174306,25.372217,-27.140806
+hushan,,Hushan Reservoir,China,2,,110.67760297909506,19.898454896851884,110.75897047177084,19.979785984172324

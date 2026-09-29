@@ -1,0 +1,29 @@
+run_name: infer_pix2pix_zero
+seed: 42
+output_dir: outputs/runs
+data:
+  archives:
+  - water_id: baogu
+    manifest_path: data/evaluation/baogu/stac_download_manifest.jsonl
+  - water_id: loweswater
+    manifest_path: data/evaluation/loweswater/stac_download_manifest.jsonl
+  - water_id: georges
+    manifest_path: data/evaluation/georges/stac_download_manifest.jsonl
+  - water_id: wentzel
+    manifest_path: data/evaluation/wentzel/stac_download_manifest.jsonl
+  - water_id: hushan
+    manifest_path: data/evaluation/hushan/stac_download_manifest.jsonl
+  sequence:
+    input_window: 6
+    min_input_observations: 4
+    train_end: '2023-12-31'
+    val_end: '2024-06-30'
+  max_scene_cloud_fraction: 0.6
+  crop_size: 256
+  target_product: mdn_chla
+  spatial_sampling: resize
+model:
+  name: pix2pix_forecaster
+checkpoint: outputs/runs/pretrain_pix2pix/checkpoint_best.pt
+split: test
+device: cuda

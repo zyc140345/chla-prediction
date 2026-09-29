@@ -1,0 +1,24 @@
+run_name: infer_ours_hushan
+output_dir: outputs/runs
+data:
+  archives:
+  - water_id: hushan
+    manifest_path: data/evaluation/hushan/stac_download_manifest.jsonl
+  sequence:
+    input_window: 6
+    min_input_observations: 4
+    train_end: '2023-12-31'
+    val_end: '2024-06-30'
+  max_scene_cloud_fraction: 0.6
+  crop_size: 256
+  target_product: mdn_chla
+model:
+  name: target_relative_attention_forecaster
+  base_channels: 32
+  latent_channels: 128
+  hidden_channels: 128
+  encoder: mdn_spectral
+  mdn_weights: data/models/mdn/mdn_msi_chl.npz
+checkpoint: outputs/runs/adapt_ours_hushan/checkpoint_forecast.pt
+split: test
+device: cuda

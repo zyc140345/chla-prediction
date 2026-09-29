@@ -1,0 +1,21 @@
+run_name: infer_scratch_convlstm_wentzel
+output_dir: outputs/runs
+data:
+  archives:
+  - water_id: wentzel
+    manifest_path: data/evaluation/wentzel/stac_download_manifest.jsonl
+  sequence:
+    input_window: 6
+    min_input_observations: 4
+    train_end: '2023-12-31'
+    val_end: '2024-06-30'
+  max_scene_cloud_fraction: 0.6
+  crop_size: 256
+  target_product: mdn_chla
+model:
+  name: stacked_conv_lstm_forecaster
+  hidden_channels: 64
+  temporal_depth: 4
+checkpoint: outputs/runs/train_scratch_convlstm_wentzel/checkpoint_forecast.pt
+split: test
+device: cuda

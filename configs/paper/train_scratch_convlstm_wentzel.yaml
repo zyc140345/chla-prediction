@@ -1,0 +1,33 @@
+run_name: train_scratch_convlstm_wentzel
+seed: 42
+output_dir: outputs/runs
+data:
+  archives:
+  - water_id: wentzel
+    manifest_path: data/evaluation/wentzel/stac_download_manifest.jsonl
+  sequence:
+    input_window: 6
+    min_input_observations: 4
+    train_end: '2023-12-31'
+    val_end: '2024-06-30'
+  max_scene_cloud_fraction: 0.6
+  crop_size: 256
+  target_product: mdn_chla
+model:
+  name: stacked_conv_lstm_forecaster
+  hidden_channels: 64
+  temporal_depth: 4
+objective:
+  reconstruction_weight: 0.0
+  prediction_loss: mse
+phases:
+- name: forecast
+  objective: forecast
+  epochs: 150
+optim:
+  learning_rate: 0.0001
+  batch_size: 2
+  num_workers: 8
+  device: cuda
+  weight_decay: 0.0
+  lr_plateau_patience: 10

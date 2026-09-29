@@ -1,0 +1,28 @@
+run_name: baseline_xgboost
+estimator: xgboost
+device: cuda
+n_jobs: 6
+output_dir: outputs/runs
+data:
+  archives:
+  - water_id: baogu
+    manifest_path: data/evaluation/baogu/stac_download_manifest.jsonl
+  - water_id: loweswater
+    manifest_path: data/evaluation/loweswater/stac_download_manifest.jsonl
+  - water_id: georges
+    manifest_path: data/evaluation/georges/stac_download_manifest.jsonl
+  - water_id: wentzel
+    manifest_path: data/evaluation/wentzel/stac_download_manifest.jsonl
+  - water_id: hushan
+    manifest_path: data/evaluation/hushan/stac_download_manifest.jsonl
+  sequence:
+    input_window: 6
+    min_input_observations: 4
+    train_end: '2023-12-31'
+    val_end: '2024-06-30'
+    train_max_lead_days: 45
+  max_scene_cloud_fraction: 0.6
+  crop_size: 256
+  input_product: mdn_chla
+split: test
+seed: 42

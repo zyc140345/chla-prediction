@@ -1,0 +1,28 @@
+run_name: pretrain_pix2pix
+seed: 42
+output_dir: outputs/runs
+data:
+  archive_root: data/corpus
+  sequence:
+    input_window: 6
+    min_input_observations: 4
+    train_end: '2023-12-31'
+    val_end: '2024-06-30'
+  max_scene_cloud_fraction: 0.6
+  crop_size: 256
+  target_product: mdn_chla
+  spatial_sampling: resize
+model:
+  name: pix2pix_forecaster
+objective:
+  reconstruction_weight: 0.0
+phases:
+- name: forecast
+  objective: forecast
+  epochs: 12
+  patience: 2
+optim:
+  learning_rate: 0.0002
+  batch_size: 8
+  num_workers: 12
+  device: cuda

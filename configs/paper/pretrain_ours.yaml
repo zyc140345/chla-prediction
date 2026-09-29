@@ -1,0 +1,35 @@
+run_name: pretrain_ours
+seed: 42
+output_dir: outputs/runs
+data:
+  archive_root: data/corpus
+  sequence:
+    input_window: 6
+    min_input_observations: 4
+    train_end: '2023-12-31'
+    val_end: '2024-06-30'
+  max_scene_cloud_fraction: 0.6
+  crop_size: 256
+  target_product: mdn_chla
+model:
+  name: target_relative_attention_forecaster
+  base_channels: 32
+  latent_channels: 128
+  hidden_channels: 128
+  encoder: mdn_spectral
+  mdn_weights: data/models/mdn/mdn_msi_chl.npz
+objective:
+  reconstruction_weight: 0.3
+phases:
+- name: warmup
+  objective: reconstruction
+  epochs: 2
+- name: forecast
+  objective: forecast
+  epochs: 12
+  patience: 2
+optim:
+  learning_rate: 0.0002
+  batch_size: 8
+  num_workers: 12
+  device: cuda
